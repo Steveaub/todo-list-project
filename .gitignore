@@ -1,0 +1,17 @@
+# Dependency directory
+node_modules/
+
+# Build output directories (optional if using Webpack or similar tools)
+dist/
+build/
+
+# Environment variables (if you’re using a .env file for sensitive data)
+.env
+
+# Log files
+*.log
+
+# OS-specific files (common on macOS and Windows)
+.DS_Store
+Thumbs.db
+
