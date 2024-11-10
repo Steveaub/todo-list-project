@@ -1,3 +1,5 @@
+import './style.css';
+
 import { format } from 'date-fns';
 
 // Factory function to create a "Todo" item
@@ -16,57 +18,51 @@ function createTodo(title, description, dueDate, priority) {
     };
 }
 
-
-// Permanent example todos
-const todos = [
-    createTodo("Grocery Shopping", "Buy groceries for the week", "2024-11-15", "high"),
-    createTodo("Laundry", "Do laundry on Sunday", "2024-11-12", "medium"),
-    createTodo("Workout", "Go for a 30-minute run", "2024-11-13", "low")
-];
+// Array to store all todos
+const todos = [];
 
 // Function to save todos to localStorage
 function saveTodos() {
     localStorage.setItem("todos", JSON.stringify(todos));
 }
 
-// Function to load todos from localStorage
+// Function to load todos from localStorage or add permanent examples if localStorage is empty
 function loadTodos() {
     const savedTodos = localStorage.getItem("todos");
     if (savedTodos) {
         const parsedTodos = JSON.parse(savedTodos);
         parsedTodos.forEach(todo => {
-            todos.push(createTodo(
+            const newTodo = createTodo(
                 todo.title,
                 todo.description,
                 todo.dueDate,
                 todo.priority
-            ));
-            if (todo.completed) {
-                todos[todos.length - 1].completed = true; // Restore completed status
-            }
+            );
+            newTodo.completed = todo.completed;
+            todos.push(newTodo);
         });
+    } else {
+        // Only add permanent examples if localStorage is empty
+        todos.push(
+            createTodo("Grocery Shopping", "Buy groceries for the week", "2024-11-15", "high"),
+            createTodo("Laundry", "Do laundry on Sunday", "2024-11-12", "medium"),
+            createTodo("Workout", "Go for a 30-minute run", "2024-11-13", "low")
+        );
     }
-}
-// Function to toggle the "completed" status of a todo
-function toggleTodoStatus(index) {
-    todos[index].toggleComplete(); // Toggle the completion status
-    renderTodos(); // Re-render to update the status on the page
-    saveTodos(); // Save to localStorage
 }
 
 // Function to add a new todo to the array
 function addTodo(title, description, dueDate, priority) {
     const newTodo = createTodo(title, description, dueDate, priority);
     todos.push(newTodo);
-    console.log(todos); // Check the updated array
     saveTodos(); // Save to localStorage
+    renderTodos(); // Render the updated list
 }
 
-
-
+// Function to render all todos on the page
 function renderTodos() {
     const appDiv = document.getElementById("app");
-    appDiv.innerHTML = ""; // Clear only the todo items
+    appDiv.innerHTML = ""; // Clear existing todos
 
     todos.forEach((todo, index) => {
         const todoItem = document.createElement("div");
@@ -74,16 +70,13 @@ function renderTodos() {
         todoItem.setAttribute("data-priority", todo.priority); // Add priority for styling
 
         // Format the due date
-        let formattedDate;
+        let formattedDate = "No Due Date";
         if (todo.dueDate) {
             try {
                 formattedDate = format(new Date(todo.dueDate), 'MM/dd/yyyy');
             } catch (error) {
                 console.error("Invalid date:", error);
-                formattedDate = "No Due Date";
             }
-        } else {
-            formattedDate = "No Due Date";
         }
 
         // Todo item content with checkbox for completion
@@ -111,14 +104,18 @@ function renderTodos() {
     });
 }
 
-
-
+// Function to toggle the "completed" status of a todo
+function toggleTodoStatus(index) {
+    todos[index].toggleComplete(); // Toggle the completion status
+    saveTodos(); // Save to localStorage
+    renderTodos(); // Re-render the updated list
+}
 
 // Function to delete a todo
 function deleteTodo(index) {
     todos.splice(index, 1); // Remove the todo at the specified index
-    renderTodos(); // Re-render the list
     saveTodos(); // Save to localStorage
+    renderTodos(); // Re-render the updated list
 }
 
 // Function to edit a todo
@@ -148,9 +145,6 @@ function addTodoFromForm() {
         // Add a new todo
         addTodo(title, description, dueDate, priority);
     }
-
-    renderTodos(); // Render the updated list
-    saveTodos(); // Save to localStorage
 
     // Clear form inputs
     document.getElementById("title").value = "";
