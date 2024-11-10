@@ -7,23 +7,28 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Todo List</h1>
-  
-  <!-- Todo Form -->
-  <div id="todo-form">
-    <input type="text" id="title" placeholder="Title">
-    <input type="text" id="description" placeholder="Description">
-    <input type="date" id="dueDate">
-    <select id="priority">
-      <option value="low">Low</option>
-      <option value="medium">Medium</option>
-      <option value="high">High</option>
-    </select>
-    <button id="add-todo-btn">Add Todo</button>
-</div>
+  <div class="container">
+    <h1>Todo List</h1>
+    
+    <div class="grid-layout">
+      <!-- Todo Form on the Left -->
+      <div id="todo-form" class="card form-section">
+        <h2>Add Todo</h2>
+        <input type="text" id="title" placeholder="Title">
+        <input type="text" id="description" placeholder="Description">
+        <input type="date" id="dueDate">
+        <select id="priority">
+          <option value="low">Low</option>
+          <option value="medium">Medium</option>
+          <option value="high">High</option>
+        </select>
+        <button id="add-todo-btn">Add Todo</button>
+      </div>
 
-  <!-- Todo List -->
-  <div id="app"></div>
+      <!-- Todo List on the Right -->
+      <div id="app" class="todo-list"></div>
+    </div>
+  </div>
 
   <script src="dist/main.js"></script>
 </body>

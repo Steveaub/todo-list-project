@@ -1,0 +1,197 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Main Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+h1 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+/* Grid Layout for Form and Todo List */
+.grid-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr; /* Form takes 1/3, Todo List takes 2/3 */
+    gap: 20px;
+}
+
+/* Form Section */
+.form-section {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#todo-form input,
+#todo-form select,
+#todo-form button {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+#todo-form button {
+    background-color: #28a745;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#todo-form button:hover {
+    background-color: #218838;
+}
+
+/* Todo List Section */
+.todo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* Todo Item Card */
+.todo-item {
+    background-color: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+
+.todo-item h3 {
+    font-size: 20px;
+    margin-bottom: 5px;
+}
+
+.todo-item p {
+    margin-bottom: 5px;
+}
+
+/* Button Styles */
+button.toggle-status-btn {
+    background-color: #007bff;
+    color: #fff;
+    padding: 8px;
+    border-radius: 4px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button.toggle-status-btn:hover {
+    background-color: #0056b3;
+}
+
+button.edit-btn {
+    background-color: #ffc107;
+    color: #333;
+    padding: 8px;
+    border-radius: 4px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button.edit-btn:hover {
+    background-color: #e0a800;
+}
+
+button.delete-btn {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 8px;
+    border-radius: 4px;
+    margin-top: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button.delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Priority Borders */
+.todo-item[data-priority="high"] {
+    border-left: 4px solid #dc3545;
+}
+
+.todo-item[data-priority="medium"] {
+    border-left: 4px solid #ffc107;
+}
+
+.todo-item[data-priority="low"] {
+    border-left: 4px solid #28a745;
+}
+/* Form Button Styles */
+#todo-form button {
+    background-color: #28a745;
+    color: #fff;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#todo-form button:hover {
+    background-color: #218838;
+}
+
+/* Buttons inside Todo Item */
+.todo-item button {
+    width: 80px;
+    padding: 5px;
+    margin: 5px 2px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    transition: background-color 0.3s;
+}
+
+.edit-btn {
+    background-color: #ffc107;
+    color: #333;
+}
+
+.edit-btn:hover {
+    background-color: #e0a800;
+}
+
+.delete-btn {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
+
+/* Checkbox Label Styling */
+.todo-item label {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+.todo-item input[type="checkbox"] {
+    margin-right: 6px;
+    transform: scale(1.2); /* Increase checkbox size for better visibility */
+}
